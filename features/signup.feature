@@ -22,7 +22,6 @@ Feature: Shopping at automationpractice.com
       | email               | firstname  | lastname   | address          | postcode | city   | mobile     | productname               |password |
       | random              | some       | ham        | 1 carbeen dr     | 67109    | kansas | 0432381123 | Blouse                    |Test@123 |
   
-    
   Scenario Outline: As new user, I am going to register a new acount with my particulars.
     Given I am on the login page
     Then I click on signIn link
