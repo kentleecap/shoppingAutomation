@@ -11,7 +11,6 @@ class ConfirmPage extends Page {
     get proceedToCheckoutProcessAddressBtn () { return $("button[name='processAddress'] span") }
     get clickTerms () { return $("#cgv") }
     get confirmOrder () { return $("p[id='cart_navigation'] span") }
-
     get confirmHeader () { return $("#center_column > h1") }
     get confirmDetail () { return $("#center_column > div") }
     
