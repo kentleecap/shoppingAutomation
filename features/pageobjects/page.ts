@@ -8,8 +8,8 @@ export default class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open (path: string) {
-        browser.setWindowSize(1000, 1000);
-        //browser.maximizeWindow()
+        //browser.setWindowSize(1000, 1000);
+        browser.maximizeWindow()
         return browser.url(`http://automationpractice.com/${path}`)
     }
 }

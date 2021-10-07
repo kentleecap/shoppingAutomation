@@ -1,7 +1,11 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 
 import LoginPage from '../pageobjects/login.page';
-import CommonPage from '../pageobjects/common.page';
+import SearchPage from '../pageobjects/search.page';
+import CartPage from '../pageobjects/cart.page';
+import CustomerPage from '../pageobjects/customer.page';
+import ConfirmPage from '../pageobjects/confirm.page';
+import PaymentPage from '../pageobjects/payment.page';
 
 const pages = {
     login: LoginPage
@@ -15,29 +19,16 @@ Then(/^I click on signIn link$/, async () => {
     await LoginPage.clicksignInLink()
 });
 
-When(/^I login with (.*) and (.+)$/, async (username, password) => {
-    await LoginPage.enterLoginIDPassword(username, password)
-});
-
-When(/^I signIn with (\w+) and (.+)$/, async (username, password) => {
-    await LoginPage.signIn(username, password)
-});
-
 Then(/^I enter firstname with (.*) and last name with (.*)$/, async (firstname,lastname) => {
-    await LoginPage.enterName(firstname,lastname,"alias");
+    await CustomerPage.enterName(firstname,lastname,"alias");
 });
 
 Then(/^I enter address with (.*) and city with (.*) and poscode with (.*)$/, async (address,city,postcode) => {
-    await LoginPage.enterAddress(address,city,postcode,"state");
+    await CustomerPage.enterAddress(address,city,postcode,"state");
 });
-
 
 Then(/^I start to create email account with (.*)$/, async (email) => {
     await LoginPage.createAccount(email);
-});
-
-Then(/^I save the screenshot$/, async () => {
-    browser.saveScreenshot("screen.jpg");
 });
 
 Then(/^I click on Register button$/, async () => {
@@ -45,11 +36,11 @@ Then(/^I click on Register button$/, async () => {
 });
 
 Then(/^I check my firstname (.*) and lastname (.*) match$/, async (firstname,lastname) => {
-    await expect(CommonPage.myCustomerName).toHaveTextContaining(firstname + " " + lastname );
+    await expect(LoginPage.myCustomerName).toHaveTextContaining(firstname + " " + lastname );
 });
 
 Then(/^I click on Sign Out$/, async () => {
-    await CommonPage.signOutClick();
+    await LoginPage.signOutClick();
 });
 
 Then(/^I click on Log In$/, async () => {
@@ -60,51 +51,47 @@ Then(/^I enter email with (.*) and password with (.*)$/, async (email,password) 
     await LoginPage.loginNow(email,password);
 });
 
-Then(/^I wait in sec until (.*)$/, async (sec) => {
-    await LoginPage.waitsleep(sec);
-});
-
 Then(/^I start to order product name by search (.*)$/, async (productname) => {
-    await LoginPage.searchProduct(productname);
-    //await LoginPage.scrolltoProduct();
-   //await LoginPage.moveToProduct();
-    
+    await SearchPage.searchProduct(productname);
 });
-
 
 Then(/^I add product to cart$/, async () => {
-    await LoginPage.addProductToCart();
+    await CartPage.addProductToCart();
 });
 
 Then(/^I scroll to product$/, async () => {
-    await LoginPage.scrolltoProduct();
+    await SearchPage.scrolltoProduct();
 });
 
 Then(/^I move to product$/, async () => {
-    await LoginPage.moveToProduct();
+    await SearchPage.moveToProduct();
 });
 
-Then(/^I start to order selected product$/, async () => {
-    await LoginPage.orderProduct();
+Then(/^I start to order selected product (.*)$/, async (productname) => {
+    await CartPage.orderProduct(productname);
 });
+
+Then(/^I land on summary page with my product order (.*)$/, async (productname) => {
+    await CartPage.summaryPage(productname);
+}); 
 
 Then(/^I start to confirm the address details$/, async () => {
-    await LoginPage.confirmAddress();
+    await ConfirmPage.confirmAddress();
 });
 
 Then(/^I start to confirm the delivery details$/, async () => {
-    await LoginPage.confirmDelivery();
+    await ConfirmPage.confirmDelivery();
 });
 
 Then(/^I select payment wire$/, async () => {
-    await LoginPage.makePaymentWire();
+    await PaymentPage.makePaymentWire();
 });
 
 Then(/^I select final confirmation$/, async () => {
-    await LoginPage.finalConformation();
+    await ConfirmPage.finalConformation();
+    await ConfirmPage.finalConfirmDetails();
 });
 
 Then(/^I maximise the windows$/, async () => {
     await LoginPage.maxWindows();
 });
-

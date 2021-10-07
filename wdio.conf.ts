@@ -135,7 +135,9 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec',['allure', {outputDir: 'allure-results',
+    disableWebdriverStepsReporting: false,
+    disableWebdriverScreenshotsReporting: false,}]],
 
 
     //
@@ -240,6 +242,11 @@ export const config: WebdriverIO.Config = {
      */
     // afterStep: function (step, context) {
     // },
+    afterStep: function (test, scenario, { error, duration, passed }) {
+        if (error) {
+          browser.takeScreenshot();
+        }
+      }
     /**
      * Runs after a Cucumber scenario
      */
