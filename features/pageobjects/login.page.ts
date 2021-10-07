@@ -12,26 +12,17 @@ class LoginPage extends Page {
     get signInLink() { return $(".nav div.header_user_info")}
     get inputUsername () { return $('#username') }
     get btnSubmit () { return $('button[type="submit"]') }
-
-    
-
     get inputUserEmail () { return $("#email") }
     get inputLoginPassword () { return $("#passwd") }
     get signInBtn () { return $("#SubmitLogin") }
-
     get createPassword () { return $('#passwd') }
     get inputEmail () { return $('#email_create') }
     get btnCreateSubmit () { return $('#SubmitCreate') }
     get submitCreate () { return $('#submitAccount') }
-
-    
-
     get nameText(){ return $("a[title='View my customer account']") }
     get logIn(){ return $("a[title='Log in to your customer account']") }
-
     get moveOverAddCart(){ return $("a[title='Add to cart']") }
     get proceedCheckout () { return $("a[title='Proceed to checkout']") }
-    
     get signOut(){ return $("a[title='Log me out']") }
     get myCustomerName(){ return $("a[title='View my customer account']") }
 
@@ -54,7 +45,6 @@ class LoginPage extends Page {
         await (await this.signOut).click();
     }
 
-    
     /**
      * SignUp with new Email
      */
