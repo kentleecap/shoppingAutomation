@@ -246,7 +246,7 @@ export const config: WebdriverIO.Config = {
         if (error) {
           browser.takeScreenshot();
         }
-      }
+      },
     /**
      * Runs after a Cucumber scenario
      */
